@@ -20,6 +20,9 @@ async function getPageLinks(browser, pageURL) {
     const pageLinks = await page.evaluate(() => Array.prototype.slice.call(document.querySelectorAll('.Yetd.page-item>a')).map(
         a => a.href
     ));
+    if (!pageLinks.length) {
+        pageLinks.push(pageURL)
+    }
     await page.close();
     return union(pageLinks);
 }
